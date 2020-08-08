@@ -4,7 +4,7 @@ pipeline {
 		maven 'Maven_auto'
 	}
 	options {
-		timestamp()
+		timestamps()
 		timeout(time: 1 units: 'HOURS')
 		skipDefaultCheckout()
 		buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '10'))
