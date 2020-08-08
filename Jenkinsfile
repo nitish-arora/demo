@@ -5,7 +5,7 @@ pipeline {
 	}
 	options {
 		timestamps()
-		timeout(time: 1 unit: 'HOURS')
+		timeout(time: 1, unit: 'HOURS')
 		skipDefaultCheckout()
 		buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '10'))
 		disableConcurrentBuilds()
@@ -39,14 +39,14 @@ pipeline {
 		stage ('Upload to artifactory') {
 			steps {
 				rtMavenDeployer (
-					id: 'deployer'
-					serverId: '3150808@nitish'
-					releaseRepo: 'nagp-practice'
+					id: 'deployer',
+					serverId: '3150808@nitish',
+					releaseRepo: 'nagp-practice',
 					snapshotRepo: 'nagp-practice'
 				)
 				rtMavenRun (
-					pom: 'pom.xml'
-					goals: 'clean install'
+					pom: 'pom.xml',
+					goals: 'clean install',
 					deployerId: 'deployer'
 				)
 			}
