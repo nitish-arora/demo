@@ -5,7 +5,7 @@ pipeline {
 	}
 	options {
 		timestamps()
-		timeout(time: 1 units: 'HOURS')
+		timeout(time: 1 unit: 'HOURS')
 		skipDefaultCheckout()
 		buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '10'))
 		disableConcurrentBuilds()
