@@ -2,6 +2,7 @@ pipeline {
 	agent any
 	tools {
 		maven 'Maven_auto'
+		jdk 'Java'
 	}
 	options {
 		timestamps()
