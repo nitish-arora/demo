@@ -57,17 +57,17 @@ pipeline {
 		}
 		stage ('Get Docker Image') {
 			steps {
-				bat 'docker build -t nitisharora31/nagpJenkins:nagpJenkins-${BUILD_NUMBER} --no-cache -f Dockerfile .'
+				bat 'docker build -t nitisharora31/nagpJenkins:nagpJenkins-%BUILD_NUMBER% --no-cache -f Dockerfile .'
 			}
 		}
 		stage ('Push to Dockerhub') {
 			steps {
-				bat 'docker push nitisharora31/nagpJenkins:nagpJenkins-${BUILD_NUMBER}'
+				bat 'docker push nitisharora31/nagpJenkins:nagpJenkins-%BUILD_NUMBER%'
 			}
 		}
 		stage ('Docker Deployment') {
 			steps {
-				bat 'docker run --name nagp-pipeline -d -p 8085:8085 nitisharora31/nagpJenkins:nagpJenkins-${BUILD_NUMBER}'
+				bat 'docker run --name nagp-pipeline -d -p 8085:8085 nitisharora31/nagpJenkins:nagpJenkins-%BUILD_NUMBER%'
 			}
 		}
 	}
