@@ -62,7 +62,9 @@ pipeline {
 		}
 		stage ('Push to Dockerhub') {
 			steps {
-				bat 'docker push nitisharora31/nagp:nagp-%BUILD_NUMBER%'
+				withDockerRegistry ([ credentialsId: '98c3992e-c86d-4ab0-ba52-05958281fd8d', url:"https://hub.docker.com/"]) {
+					bat 'docker push nitisharora31/nagp:nagp-%BUILD_NUMBER%'
+				}				
 			}
 		}
 		stage ('Docker Deployment') {
