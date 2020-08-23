@@ -63,7 +63,7 @@ pipeline {
 		}
 		stage ('Stop and remove container') {
 			steps {
-				bat '(docker stop nagp-pipeline || true) && (docker rm -fv nagp-pipeline || true)'
+				bat '(docker stop nagp-pipeline || echo "No running container exist with name \"nagp-pipeline\"") && (docker rm -fv nagp-pipeline || echo "No container with name \"nagp-pipeline\" exist with in stopped container list")'
 			}
 		}
 		stage ('Docker Deployment') {
