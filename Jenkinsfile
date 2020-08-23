@@ -51,26 +51,12 @@ pipeline {
 					deployerId: 'deployer'
 				)
 				rtPublishBuildInfo (
-					serverId: '3150808@nitish'
+					serverId: '3150808@nitish',
+					buildName: 'before-exam',
+					buildNumber: $BUILD_NUMBER
 				)
 			}
-		}
-		stage ('Get Docker Image') {
-			steps {
-				bat 'docker build -t nitisharora31/nagp:nagp-%BUILD_NUMBER% --no-cache -f Dockerfile .'
-			}
-		}
-		stage ('Push to Dockerhub') {
-			steps {
-				bat 'docker login -u nitisharora31 -p 4n@gp@2020'
-				bat 'docker push nitisharora31/nagp:nagp-%BUILD_NUMBER%'
-			}
-		}
-		stage ('Docker Deployment') {
-			steps {
-				bat 'docker run --name nagp-pipeline -d -p 8085:8085 nitisharora31/nagp:nagp-%BUILD_NUMBER%'
-			}
-		}
+		}		
 	}
 	post {
 		always {
