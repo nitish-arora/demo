@@ -47,7 +47,25 @@ pipeline {
 					serverId: '3150808@nitish'
 				)
 			}
-		}		
+		}
+		stage ('Get Docker Image') {
+			steps {
+				bat 'docker build -t nitisharora31/nagp:nagp-%BUILD_NUMBER% --no-cache -f Dockerfile .'
+			}
+		}
+		stage ('Push to Dockerhub') {			
+			steps {
+				withCredentials([usernamePassword(credentialsId: '98c3992e-c86d-4ab0-ba52-05958281fd8d', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
+					bat 'docker login -u %env.docker_username%' -p %env.docker_password%
+					bat 'docker push nitisharora31/nagp:nagp-%BUILD_NUMBER%'
+				}
+			}
+		}
+		stage ('Docker Deployment') {
+			steps {
+				bat 'docker run --name nagp-pipeline -d -p 8085:8085 nitisharora31/nagp:nagp-%BUILD_NUMBER%'
+			}
+		}
 	}
 	post {
 		always {
