@@ -45,8 +45,7 @@ pipeline {
 				)
 				rtPublishBuildInfo (
 					serverId: '3150808@nitish',
-					buildName: 'before-exam',
-					buildNumber: $BUILD_NUMBER
+					buildName: 'before-exam'
 				)
 			}
 		}		
