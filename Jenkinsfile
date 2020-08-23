@@ -61,6 +61,11 @@ pipeline {
 				}
 			}
 		}
+		stage ('Stop and remove container') {
+			steps {
+				bat '(docker stop nagp-pipeline || true) && (docker rm -fv nagp-pipeline || true)'
+			}
+		}
 		stage ('Docker Deployment') {
 			steps {
 				bat 'docker run --name nagp-pipeline -d -p 8085:8085 nitisharora31/nagp:nagp-%BUILD_NUMBER%'
