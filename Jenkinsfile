@@ -35,17 +35,16 @@ pipeline {
 				rtMavenDeployer (
 					id: 'deployer',
 					serverId: '3150808@nitish',
-					releaseRepo: 'nagp-practice',
-					snapshotRepo: 'nagp-practice'
+					releaseRepo: 'before-exam',
+					snapshotRepo: 'before-exam'
 				)
 				rtMavenRun (
 					pom: 'pom.xml',
 					goals: 'clean install',
 					deployerId: 'deployer'
-				)
+				)				
 				rtPublishBuildInfo (
-					serverId: '3150808@nitish',
-					buildName: 'before-exam'
+					serverId: '3150808@nitish'
 				)
 			}
 		}		
