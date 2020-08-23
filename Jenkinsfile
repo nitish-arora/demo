@@ -56,7 +56,7 @@ pipeline {
 		stage ('Push to Dockerhub') {			
 			steps {
 				withCredentials([usernamePassword(credentialsId: '98c3992e-c86d-4ab0-ba52-05958281fd8d', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
-					bat 'docker login -u %env.docker_username%' -p %env.docker_password%
+					bat 'docker login -u %docker_username%' -p %docker_password%
 					bat 'docker push nitisharora31/nagp:nagp-%BUILD_NUMBER%'
 				}
 			}
